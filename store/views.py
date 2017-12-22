@@ -30,9 +30,28 @@ def contacts(request):
     return render(request, "contacts.html")
 
 
+def product(request, id):
+    """
+    Страница товара
+    :param request:
+    :param id: идентификатор товара
+    :return: product.html
+    """
+    product = Product.objects.get(id=id)
+    return render(
+        request,
+        "product.html",
+        {
+            "product": product
+        }
+    )
+
+
 def add_to_cart(request, id, quantity):
     """
     Добавить товар в корзину
+    :param id: идентификатор товара
+    :param quantity: количество
     :param request:
     :return:
     """
@@ -40,3 +59,4 @@ def add_to_cart(request, id, quantity):
     cart = Cart.objects.get_or_create(session_key=request.session.session_key)[0]
     CartItem.objects.create(product=product, quantity=quantity, cart=cart)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
