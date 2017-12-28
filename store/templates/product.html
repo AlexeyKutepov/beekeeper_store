@@ -17,20 +17,32 @@
         <!-- Portfolio Item Row -->
         <div class="row">
 
-            <div class="col-md-8">
-                <img class="img-fluid" src="{{ product.photo.url }}" alt="">
+            <div class="col-md-6">
+                <img class="rounded" width="100%" src="{{ product.photo.url }}">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3 class="my-3">О товаре</h3>
-                <p>Цена: <b>{{ product.price }} руб/{{ product.measure }}</b></p>
+                <p>Цена: <b style="color: #1e7e34">{{ product.price }} руб/{{ product.measure }}</b></p>
                 <p>Наличие: {% if product.in_stock %}
                     <span style="color: green; ">В наличии</span>
                 {% else %}
                     <span style="color: red; ">Нет в наличии</span>
                 {% endif %}
                 </p>
-                <a href="{% url "add_to_cart" id=product.id quantity=1 %}" class="btn btn-primary">Купить</a>
+                <div class="form-inline">
+                    <div class="input-group" style="width: 300px">
+                        <div class="input-group-addon">Количество</div>
+                        {% if product.measure == "кг" %}
+                            <input type="number" step="0.100" class="form-control" value="1">
+                        {% else %}
+                            <input type="number" step="1" class="form-control" value="1">
+                        {% endif %}
+                        <div class="input-group-addon">{{ product.measure }}</div>
+                    </div>
+                    <a href="{% url "add_to_cart" id=product.id quantity=1 %}" style="margin-left: 10px"
+                       class="btn btn-primary">Купить</a>
+                </div>
             </div>
 
         </div>

@@ -54,12 +54,12 @@
                 {% endif %}
                 <div class="col-lg-4 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img height="300px" class="card-img-top" src="{{ product.photo.url }}" alt=""></a>
+                        <a href="{% url "product" id=product.id %}"><img height="300px" class="card-img-top" src="{{ product.photo.url }}" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
                                 <a href="{% url "product" id=product.id %}">{{ product.name }}</a>
                             </h4>
-                            <h5 class="card-title">{{ product.price }} руб / {{ product.measure }}</h5>
+                            <h5 class="card-title" style="color: #1e7e34">{{ product.price }} руб/{{ product.measure }}</h5>
                             <p class="card-text">{{ product.short_description }}</p>
                             <a href="{% url "add_to_cart" id=product.id quantity=1 %}" class="btn btn-primary">Купить</a>
                         </div>

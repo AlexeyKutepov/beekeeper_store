@@ -23,6 +23,7 @@
                 <th>Название</th>
                 <th>Цена</th>
                 <th>Количество</th>
+                <th>Итого</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -35,14 +36,22 @@
                         </a>
                     </td>
                     <td>{{ item.product.name }}</td>
-                    <td>{{ item.product.price }} руб/{{ item.product.measure }}</td>
+                    <td><span style="color: green; ">{{ item.product.price }} руб/{{ item.product.measure }}</span></td>
                     <td>
                         <div class="input-group" style="width: 150px">
-                            <input type="number" step="0.100" class="form-control" value="{{ item.quantity }}">
+                            {% if item.product.measure == "кг" %}
+                                <input type="number" step="0.100" class="form-control" value="{{ item.quantity }}">
+                            {% else %}
+                                <input type="number" step="1" class="form-control" value="{{ item.quantity }}">
+                            {% endif %}
                             <div class="input-group-addon">{{ item.product.measure }}</div>
                         </div>
                     </td>
-                    <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                    <td>
+
+                    </td>
+                    <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i
+                            class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>
