@@ -12,11 +12,13 @@ def index(request):
     :return:
     """
     product_list = Product.objects.all()
+    cart_item_list = get_cart_item_list(request)
     return render(
         request,
         "index.html",
         {
-            "product_list": product_list
+            "product_list": product_list,
+            "cart_size": len(cart_item_list)
         }
     )
 
@@ -38,11 +40,30 @@ def product(request, id):
     :return: product.html
     """
     product = Product.objects.get(id=id)
+    cart_item_list = get_cart_item_list(request)
     return render(
         request,
         "product.html",
         {
-            "product": product
+            "product": product,
+            "cart_size": len(cart_item_list)
+        }
+    )
+
+
+def cart(request):
+    """
+    Корзина
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    return render(
+        request,
+        "cart.html",
+        {
+            "cart_item_list": cart_item_list,
+            "cart_size": len(cart_item_list)
         }
     )
 
@@ -59,4 +80,26 @@ def add_to_cart(request, id, quantity):
     cart = Cart.objects.get_or_create(session_key=request.session.session_key)[0]
     CartItem.objects.create(product=product, quantity=quantity, cart=cart)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def delete_from_cart(request, id):
+    """
+    Удалить товар из корзины
+    :param id: идентификатор товара
+    :param request:
+    :return:
+    """
+    CartItem.objects.get(id=id).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def get_cart_item_list(request):
+    """
+    Возвращает список продуктов в корзине
+    :param request:
+    :return:
+    """
+    cart = Cart.objects.get_or_create(session_key=request.session.session_key)[0]
+    return CartItem.objects.filter(cart=cart)
+
 
