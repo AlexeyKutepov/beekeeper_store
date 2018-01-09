@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load poll_extras %}
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Заказ №{{ order.id }}
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "index" %}">Главная</a>
+            </li>
+            <li class="breadcrumb-item active">Заказ №{{ order.id }}</li>
+        </ol>
+
+        <!-- Project One -->
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Итого</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order_item_list %}
+                <tr>
+                    <td>
+                        <a href="#">
+                            <img height="50px" class="rounded mb-3 mb-md-0" src="{{ item.product.photo.url }}" alt="">
+                        </a>
+                    </td>
+                    <td>{{ item.product.name }}</td>
+                    <td><span style="color: green; ">{{ item.product.price }} руб/{{ item.product.measure }}</span></td>
+                    <td>
+                        {{ item.quantity }} {{ item.product.measure }}
+                    </td>
+                    <td>
+                        <span style="color: green; ">{{ item.quantity|mul:item.product.price }} руб</span>
+                    </td>
+                    <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i
+                            class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p></p>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

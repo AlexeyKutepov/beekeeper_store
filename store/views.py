@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -129,6 +130,19 @@ def create_order(request):
             OrderItem.objects.create(product=item.product, quantity=item.quantity, order=order)
             item.delete()
         cart.delete()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return HttpResponseRedirect(reverse("show_order", args=[order.id,]))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def show_order(request, id):
+    order = Order.objects.get(id=id)
+    order_item_list = OrderItem.objects.filter(order=order)
+    return render(
+        request,
+        "order.html",
+        {
+            "order": order,
+            "order_item_list": order_item_list,
+        }
+    )
