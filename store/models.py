@@ -46,9 +46,33 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart)
 
 
+class Order(models.Model):
+    """
+    Заказ
+    """
+    accepted = 'Принят'
+    execution = 'Исполнение'
+    executed = 'Исполнен'
+    canceled = 'Отменён'
+    status_classifier = (
+        (accepted, 'Принят'),
+        (execution, 'Исполнение'),
+        (executed, 'Исполнен'),
+        (canceled, 'Отменён'),
+    )
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=10, choices=status_classifier, default=accepted)
 
 
-
+class OrderItem(models.Model):
+    """
+    Элемент заказа
+    """
+    product = models.ForeignKey(Product)
+    quantity = models.FloatField()
+    order = models.ForeignKey(Order)
 
 
 

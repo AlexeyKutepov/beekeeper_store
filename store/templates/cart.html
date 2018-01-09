@@ -63,9 +63,39 @@
                 <a href="" class="btn btn-warning pull-right">Обновить корзину</a>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="createOrder" tabindex="-1" role="dialog" aria-labelledby="createOrderLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="createOrderLabel">Оформление заказа</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form role="form" action="{% url "create_order" %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <input type="text" name="phone" class="form-control"
+                                       placeholder="Введите номер телефона" autofocus required>
+                            </div>
+                            <p></p>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Введите e-mail">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Оформить заказ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="" class="btn btn-success">Оформить заказ</a>
+                <a href="" class="btn btn-success" data-toggle="modal" data-target="#createOrder">Оформить заказ</a>
             </div>
         </div>
         <p></p>
