@@ -15,90 +15,103 @@
             <li class="breadcrumb-item active">Корзина</li>
         </ol>
 
-        <!-- Project One -->
+        {% if cart_item_list %}
 
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Изображение</th>
-                <th>Название</th>
-                <th>Цена</th>
-                <th>Количество</th>
-                <th>Итого</th>
-                <th>Действия</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in cart_item_list %}
+            <!-- Project One -->
+
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <td>
-                        <a href="#">
-                            <img height="50px" class="rounded mb-3 mb-md-0" src="{{ item.product.photo.url }}" alt="">
-                        </a>
-                    </td>
-                    <td>{{ item.product.name }}</td>
-                    <td><span style="color: green; ">{{ item.product.price }} руб/{{ item.product.measure }}</span></td>
-                    <td>
-                        <div class="input-group" style="width: 150px">
-                            {% if item.product.measure == "кг" %}
-                                <input type="number" step="0.100" class="form-control" value="{{ item.quantity }}">
-                            {% else %}
-                                <input type="number" step="1" class="form-control" value="{{ item.quantity }}">
-                            {% endif %}
-                            <div class="input-group-addon">{{ item.product.measure }}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <span style="color: green; ">{{ item.quantity|mul:item.product.price }} руб</span>
-                    </td>
-                    <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i
-                            class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                    <th>Изображение</th>
+                    <th>Название</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Итого</th>
+                    <th>Действия</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <hr>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="" class="btn btn-warning pull-right">Обновить корзину</a>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="createOrder" tabindex="-1" role="dialog" aria-labelledby="createOrderLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="createOrderLabel">Оформление заказа</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form role="form" action="{% url "create_order" %}" method="post">
-                        {% csrf_token %}
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <input type="text" name="phone" class="form-control"
-                                       placeholder="Введите номер телефона" autofocus required>
+                </thead>
+                <tbody>
+                {% for item in cart_item_list %}
+                    <tr>
+                        <td>
+                            <a href="#">
+                                <img height="50px" class="rounded mb-3 mb-md-0" src="{{ item.product.photo.url }}"
+                                     alt="">
+                            </a>
+                        </td>
+                        <td>{{ item.product.name }}</td>
+                        <td><span style="color: green; ">{{ item.product.price }} руб/{{ item.product.measure }}</span>
+                        </td>
+                        <td>
+                            <div class="input-group" style="width: 150px">
+                                {% if item.product.measure == "кг" %}
+                                    <input type="number" step="0.100" class="form-control" value="{{ item.quantity }}">
+                                {% else %}
+                                    <input type="number" step="1" class="form-control" value="{{ item.quantity }}">
+                                {% endif %}
+                                <div class="input-group-addon">{{ item.product.measure }}</div>
                             </div>
-                            <p></p>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Введите e-mail">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Оформить заказ</button>
-                        </div>
-                    </form>
+                        </td>
+                        <td>
+                            <span style="color: green; ">{{ item.quantity|mul:item.product.price }} руб</span>
+                        </td>
+                        <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i
+                                class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="" class="btn btn-warning pull-right">Обновить корзину</a>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <a href="" class="btn btn-success" data-toggle="modal" data-target="#createOrder">Оформить заказ</a>
+            <!-- Modal -->
+            <div class="modal fade" id="createOrder" tabindex="-1" role="dialog" aria-labelledby="createOrderLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="createOrderLabel">Оформление заказа</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form role="form" action="{% url "create_order" %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <input type="text" name="phone" class="form-control"
+                                           placeholder="Введите номер телефона" autofocus required>
+                                </div>
+                                <p></p>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Введите e-mail">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Оформить заказ</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <p></p>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#createOrder">Оформить заказ</a>
+                </div>
+            </div>
+            <p></p>
+
+        {% else %}
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Корзина пуста</h3>
+                    <a href="{% url "index" %}" class="btn btn-primary">Продолжить покупки</a>
+                </div>
+            </div>
+        {% endif %}
 
     </div>
     <!-- /.container -->
