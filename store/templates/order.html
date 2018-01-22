@@ -15,6 +15,20 @@
             <li class="breadcrumb-item active">Заказ №{{ order.id }}</li>
         </ol>
 
+        {% if order.status == 'Принят' or order.status == 'Исполнение' %}
+            <div class="alert alert-primary" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% elif order.status == 'Исполнен' %}
+            <div class="alert alert-success" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% elif order.status == 'Отменён' %}
+            <div class="alert alert-danger" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% endif %}
+
         <!-- Project One -->
 
         <table class="table table-hover">
