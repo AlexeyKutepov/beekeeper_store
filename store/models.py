@@ -29,6 +29,12 @@ class Product(models.Model):
     # Флаг указывающий наличие товара на складе
     in_stock = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
 
 class Cart(models.Model):
     """
@@ -65,6 +71,12 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=status_classifier, default=accepted)
 
+    def __unicode__(self):
+        return self.phone
+
+    def __str__(self):
+        return self.phone
+
 
 class OrderItem(models.Model):
     """
@@ -73,6 +85,8 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.FloatField()
     order = models.ForeignKey(Order)
+
+
 
 
 
