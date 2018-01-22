@@ -23,4 +23,5 @@ from beekeeper_store import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('store.urls')),
+    url(r'^', include('control_panel.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
