@@ -33,7 +33,6 @@
             </thead>
             <tbody>
             {% for item in order_list %}
-
                     <tr class="{% if item.status == 'Принят' %}table-info{% elif item.status == 'Исполнение' %}table-primary{% elif item.status == 'Исполнен' %}table-success{% elif item.status == 'Отменён' %}table-danger{% endif %}">
                         <td><a href="{% url "control_order" id=item.id %}">{{ item.id }}</a></td>
                         <td><a href="{% url "control_order" id=item.id %}">{{ item.phone }}</a></td>
@@ -41,7 +40,6 @@
                         <td><a href="{% url "control_order" id=item.id %}">{{ item.date }}</a></td>
                         <td><a href="{% url "control_order" id=item.id %}">{{ item.status }}</a></td>
                     </tr>
-                </a>
             {% endfor %}
             </tbody>
         </table>
