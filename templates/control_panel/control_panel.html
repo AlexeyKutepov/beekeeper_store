@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             {% for item in order_list %}
-                <tr>
+                <tr class="{% if item.status == 'Принят' %}table-info{% elif item.status == 'Исполнение' %}table-primary{% elif item.status == 'Исполнен' %}table-success{% elif item.status == 'Отменён' %}table-danger{% endif %}">
                     <td>{{ item.id }}</td>
                     <td>{{ item.phone }}</td>
                     <td>{{ item.email }}</td>
