@@ -21,6 +21,9 @@
 <form class="form-signin" action="{% url "sign_in" %}" method="post">
     {% csrf_token %}
     <h1 class="h3 mb-3 font-weight-normal">Вход в панель управления</h1>
+    {% if login_error %}
+        <b style="color: #FF0000">Неверный логин или пароль</b>
+    {% endif %}
     <div class="form-group {{ login_error|default:"" }}">
         <label for="inputLogin" class="sr-only">Логин</label>
         <input type="text" id="inputLogin" name="login" class="form-control" placeholder="Логин" required autofocus>
