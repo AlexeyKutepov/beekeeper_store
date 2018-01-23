@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from store.models import Order
+from store.models import Order, OrderItem
 
 
 def sign_in(request):
@@ -33,5 +33,18 @@ def control(request):
         "control_panel/control_panel.html",
         {
             "order_list": order_list
+        }
+    )
+
+
+def control_order(request, id):
+    order = Order.objects.get(id=id)
+    order_item_list = OrderItem.objects.filter(order=order)
+    return render(
+        request,
+        "control_panel/order.html",
+        {
+            "order": order,
+            "order_item_list": order_item_list,
         }
     )
