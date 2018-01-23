@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from store.models import Order
+
 
 def sign_in(request):
     """
@@ -17,12 +19,19 @@ def sign_in(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("control"))
         else:
-            return render(request, "sign_in.html", {"login_error": "has-error"})
+            return render(request, "control_panel/sign_in.html", {"login_error": "has-error"})
     else:
-        return render(request, "sign_in.html")
+        return render(request, "control_panel/sign_in.html")
 
 
 def control(request):
-    return HttpResponseRedirect(reverse("index"))
+    order_list = Order.objects.all().order_by('-date')
+    return render(
+        request,
+        "control_panel/control_panel.html",
+        {
+            "order_list": order_list
+        }
+    )

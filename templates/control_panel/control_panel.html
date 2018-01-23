@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load poll_extras %}
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Панель управления</h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "index" %}">Главная</a>
+            </li>
+            <li class="breadcrumb-item active">Панель управления</li>
+        </ol>
+
+        <div class="text-center">
+            <h3 class="mt-4 mb-3">Заказы</h3>
+        </div>
+
+
+        <!-- Project One -->
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>№ заказа</th>
+                <th>Телефон</th>
+                <th>E-mail</th>
+                <th>Дата</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order_list %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p></p>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

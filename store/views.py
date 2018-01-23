@@ -16,7 +16,7 @@ def index(request):
     cart_item_list = get_cart_item_list(request)
     return render(
         request,
-        "index.html",
+        "store/index.html",
         {
             "product_list": product_list,
             "cart_size": len(cart_item_list)
@@ -30,7 +30,7 @@ def contacts(request):
     :param request:
     :return:
     """
-    return render(request, "contacts.html")
+    return render(request, "store/contacts.html")
 
 
 def product(request, id):
@@ -44,7 +44,7 @@ def product(request, id):
     cart_item_list = get_cart_item_list(request)
     return render(
         request,
-        "product.html",
+        "store/product.html",
         {
             "product": product,
             "cart_size": len(cart_item_list)
@@ -61,7 +61,7 @@ def cart(request):
     cart_item_list = get_cart_item_list(request)
     return render(
         request,
-        "cart.html",
+        "store/cart.html",
         {
             "cart_item_list": cart_item_list,
             "cart_size": len(cart_item_list)
@@ -140,7 +140,7 @@ def show_order(request, id):
     order_item_list = OrderItem.objects.filter(order=order)
     return render(
         request,
-        "order.html",
+        "store/order.html",
         {
             "order": order,
             "order_item_list": order_item_list,
