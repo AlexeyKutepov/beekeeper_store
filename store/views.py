@@ -148,3 +148,10 @@ def show_order(request, id):
             "order_item_list": order_item_list,
         }
     )
+
+
+def about(request):
+    return render(
+        request,
+        "store/about.html"
+    )
