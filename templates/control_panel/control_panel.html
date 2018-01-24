@@ -34,11 +34,11 @@
             <tbody>
             {% for item in order_list %}
                     <tr class="{% if item.status == 'Принят' %}table-info{% elif item.status == 'Исполнение' %}table-primary{% elif item.status == 'Исполнен' %}table-success{% elif item.status == 'Отменён' %}table-danger{% endif %}">
-                        <td><a href="{% url "control_order" id=item.id %}">{{ item.id }}</a></td>
-                        <td><a href="{% url "control_order" id=item.id %}">{{ item.phone }}</a></td>
-                        <td><a href="{% url "control_order" id=item.id %}">{{ item.email }}</a></td>
-                        <td><a href="{% url "control_order" id=item.id %}">{{ item.date }}</a></td>
-                        <td><a href="{% url "control_order" id=item.id %}">{{ item.status }}</a></td>
+                        <td><a href="{% url "control_order" id=item.id %}">Заказ №{{ item.id }}</a></td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.date|date:"d.m.Y H:i:s" }}</td>
+                        <td>{{ item.status }}</td>
                     </tr>
             {% endfor %}
             </tbody>

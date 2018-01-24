@@ -12,22 +12,29 @@
             <li class="breadcrumb-item">
                 <a href="{% url "index" %}">Главная</a>
             </li>
+            <li class="breadcrumb-item">
+                <a href="{% url "control" %}">Панель управления</a>
+            </li>
             <li class="breadcrumb-item active">Заказ №{{ order.id }}</li>
         </ol>
 
-        {% if order.status == 'Принят' or order.status == 'Исполнение' %}
-            <div class="alert alert-primary" role="alert">
-                Статус заказа: {{ order.status }}
+        <form action="{% url "change_order_status" id=order.id %}" method="post">
+        {% csrf_token %}
+            <div class="input-group mb-3">
+                <select name="status" class="custom-select" id="inputSelectStatus">
+                    <option value="Принят" {% if order.status == 'Принят' %}selected{% endif %}>Принят</option>
+                    <option value="Исполнение" {% if order.status == 'Исполнение' %}selected{% endif %}>Исполнение
+                    </option>
+                    <option value="Исполнен" {% if order.status == 'Исполнен' %}selected{% endif %}>Исполнен</option>
+                    <option value="Отменён" {% if order.status == 'Отменён' %}selected{% endif %}>Отменён</option>
+                </select>
+                <div class="input-group-append" style="margin-left: 10px">
+                    <a>
+                        <button class="btn btn-outline-secondary" type="submit">Сохранить</button>
+                    </a>
+                </div>
             </div>
-        {% elif order.status == 'Исполнен' %}
-            <div class="alert alert-success" role="alert">
-                Статус заказа: {{ order.status }}
-            </div>
-        {% elif order.status == 'Отменён' %}
-            <div class="alert alert-danger" role="alert">
-                Статус заказа: {{ order.status }}
-            </div>
-        {% endif %}
+        </form>
 
         <!-- Project One -->
 
@@ -39,7 +46,6 @@
                 <th>Цена</th>
                 <th>Количество</th>
                 <th>Итого</th>
-                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -58,11 +64,18 @@
                     <td>
                         <span style="color: green; ">{{ item.quantity|mul:item.product.price }} руб</span>
                     </td>
-                    <td><a href="{% url "delete_from_cart" id=item.id %}" class="btn btn-default"><i
-                            class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>
+            <tfoot>
+            <tr>
+                <td><b>Итого:</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{ sum_order }} руб</b></td>
+            </tr>
+            </tfoot>
         </table>
         <p></p>
 

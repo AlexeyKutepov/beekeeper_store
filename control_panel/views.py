@@ -40,11 +40,26 @@ def control(request):
 def control_order(request, id):
     order = Order.objects.get(id=id)
     order_item_list = OrderItem.objects.filter(order=order)
+    sum_order = 0
+    for item in order_item_list:
+        sum_order += item.quantity * item.product.price
     return render(
         request,
         "control_panel/order.html",
         {
             "order": order,
             "order_item_list": order_item_list,
+            "sum_order": sum_order,
         }
     )
+
+
+def change_order_status(request, id):
+    if "status" in request.POST:
+        status = request.POST.get("status")
+        order = Order.objects.get(id=id)
+        order.status = status
+        order.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
