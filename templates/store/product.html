@@ -1,5 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <div class="modal fade" id="buyProductModal" tabindex="-1"
+         role="dialog"
+         aria-labelledby="buyProductLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="buyProductLabel">
+                        Покупка</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form role="form" action="{% url "add_to_cart" id=product.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <h6>{{ product.name }}</h6>
+                        <div class="input-group">
+                            <input name="quantity"
+                                   type="number"
+                                   step="{% if product.measure == "кг" %}0.100{% else %}1{% endif %}"
+                                   class="form-control"
+                                   value="1">
+                            <div class="input-group-addon">
+                                {{ product.measure }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Купить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Page Content -->
     <div class="container">
 
@@ -40,8 +75,8 @@
                         {% endif %}
                         <div class="input-group-addon">{{ product.measure }}</div>
                     </div>
-                    <a href="{% url "add_to_cart" id=product.id quantity=1 %}" style="margin-left: 10px"
-                       class="btn btn-primary">Купить</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal"
+                       data-target="#buyProductModal" style="margin-left: 10px">Купить</a>
                 </div>
             </div>
 

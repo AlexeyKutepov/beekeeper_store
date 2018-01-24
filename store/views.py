@@ -69,7 +69,7 @@ def cart(request):
     )
 
 
-def add_to_cart(request, id, quantity):
+def add_to_cart(request, id):
     """
     Добавить товар в корзину
     :param id: идентификатор товара
@@ -79,10 +79,12 @@ def add_to_cart(request, id, quantity):
     """
     if not request.session.session_key:
         request.session.save()
-    product = Product.objects.get(id=id)
-    cart = Cart.objects.get_or_create(session_key=request.session.session_key)[0]
-    CartItem.objects.create(product=product, quantity=quantity, cart=cart)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if "quantity" in request.POST:
+        quantity = request.POST.get("quantity")
+        product = Product.objects.get(id=id)
+        cart = Cart.objects.get_or_create(session_key=request.session.session_key)[0]
+        CartItem.objects.create(product=product, quantity=quantity, cart=cart)
+    return HttpResponseRedirect(reverse("cart"))
 
 
 def delete_from_cart(request, id):
