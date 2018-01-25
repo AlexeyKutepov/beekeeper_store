@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.contrib import admin
 
-from store.models import Product, Cart, Order, OrderItem, CartItem, Feedback
+from store.models import Product, Cart, Order, OrderItem, CartItem, Feedback, Photo
 
 
 @admin.register(Product)
@@ -26,7 +26,7 @@ class CartItem(admin.ModelAdmin):
     """
     Элемент заказа
     """
-    list_display = ('cart', 'product', 'quantity', )
+    list_display = ('cart', 'product', 'quantity',)
     list_filter = ('cart',)
 
 
@@ -44,7 +44,7 @@ class OrderItem(admin.ModelAdmin):
     """
     Элемент заказа
     """
-    list_display = ('order', 'product', 'quantity', )
+    list_display = ('order', 'product', 'quantity',)
     list_filter = ('order',)
 
 
@@ -53,5 +53,14 @@ class Feedback(admin.ModelAdmin):
     """
     Обратная связь
     """
-    list_display = ('name', 'phone', 'email', 'message', 'date')
+    list_display = ('name', 'phone', 'email', 'message', 'date',)
+    list_filter = ('date',)
+
+
+@admin.register(Photo)
+class Photo(admin.ModelAdmin):
+    """
+    Фотографии
+    """
+    list_display = ('name', 'date',)
     list_filter = ('date',)

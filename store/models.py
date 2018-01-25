@@ -106,3 +106,17 @@ class Feedback(models.Model):
         return self.name
 
 
+class Photo(models.Model):
+    """
+    Фотографии
+    """
+    name = models.CharField(max_length=200)
+    date = models.DateTimeField(default=timezone.now)
+    photo = models.ImageField(upload_to="photos")
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
