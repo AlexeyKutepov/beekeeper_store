@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load poll_extras %}
 {% block content %}
     <!-- Page Content -->
@@ -13,6 +14,23 @@
             </li>
             <li class="breadcrumb-item active">Документы</li>
         </ol>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static "img/docs/doc1.jpg" %}" width="100%">
+            </div>
+            <div class="col-md-6">
+                <img src="{% static "img/docs/doc2.jpg" %}" width="100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static "img/docs/doc3.jpg" %}" width="100%">
+            </div>
+            <div class="col-md-6">
+                <img src="{% static "img/docs/doc4.jpg" %}" width="100%">
+            </div>
+        </div>
 
     </div>
     <!-- /.container -->
