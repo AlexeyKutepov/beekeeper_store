@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from store.models import Product, CartItem, Cart, Order, OrderItem
+from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback
 
 
 def index(request):
@@ -138,20 +138,84 @@ def create_order(request):
 
 
 def show_order(request, id):
+    """
+    Показать заказ
+    :param request:
+    :param id: идентификатор заказа
+    :return:
+    """
     order = Order.objects.get(id=id)
     order_item_list = OrderItem.objects.filter(order=order)
+    cart_item_list = get_cart_item_list(request)
     return render(
         request,
         "store/order.html",
         {
             "order": order,
             "order_item_list": order_item_list,
+            "cart_size": len(cart_item_list)
         }
     )
 
 
 def about(request):
+    """
+    Обо мне
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
     return render(
         request,
-        "store/about.html"
+        "store/about.html",
+        {
+            "cart_size": len(cart_item_list)
+        }
     )
+
+
+def photo(request):
+    """
+    Фото
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    return render(
+        request,
+        "store/photo.html",
+        {
+            "cart_size": len(cart_item_list)
+        }
+    )
+
+
+def documents(request):
+    """
+    Документы
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    return render(
+        request,
+        "store/documents.html",
+        {
+            "cart_size": len(cart_item_list)
+        }
+    )
+
+
+def feedback(request):
+    """
+    Фидбэк
+    :param request:
+    :return:
+    """
+    if "name" in request.POST and "email" in request.POST and "phone" in request.POST and "message" in request.POST:
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
+        Feedback.objects.create(name=name, email=email, phone=phone, message=message)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

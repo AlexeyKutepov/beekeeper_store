@@ -37,34 +37,33 @@
       <div class="row">
         <div class="col-lg-8 mb-4">
           <h3>Написать сообщение</h3>
-          <form name="sentMessage" id="contactForm" novalidate>
+          <form name="sentMessage" id="contactForm" action="{% url "feedback" %}" method="post">
+            {% csrf_token %}
             <div class="control-group form-group">
               <div class="controls">
                 <label>Имя:</label>
-                <input type="text" class="form-control" id="name" required data-validation-required-message="Пожалуйста, введите своё имя!">
+                <input type="text" class="form-control" name="name" required>
                 <p class="help-block"></p>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Телефон:</label>
-                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Пожалуйста, введите номер телефона!">
+                <input type="tel" class="form-control" name="phone" required>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Email:</label>
-                <input type="email" class="form-control" id="email" required data-validation-required-message="Пожалуйста, введите адрес электронной почты!">
+                <input type="email" class="form-control" name="email" required>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Сообщение:</label>
-                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Пожалуйста, введите текст сообщения!" maxlength="999" style="resize:none"></textarea>
+                <textarea rows="10" cols="100" class="form-control" name="message" required maxlength="999" style="resize:none"></textarea>
               </div>
             </div>
-            <div id="success"></div>
-            <!-- For success/fail messages -->
             <button type="submit" class="btn btn-primary">Отправить</button>
           </form>
         </div>

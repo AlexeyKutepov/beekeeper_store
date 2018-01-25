@@ -89,6 +89,20 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order)
 
 
+class Feedback(models.Model):
+    """
+    Обратная связь
+    """
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    message = models.TextField()
+    date = models.DateTimeField(default=timezone.now)
 
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
 
 

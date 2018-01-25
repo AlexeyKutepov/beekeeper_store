@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.contrib import admin
 
-from store.models import Product, Cart, Order, OrderItem, CartItem
+from store.models import Product, Cart, Order, OrderItem, CartItem, Feedback
 
 
 @admin.register(Product)
@@ -46,3 +46,12 @@ class OrderItem(admin.ModelAdmin):
     """
     list_display = ('order', 'product', 'quantity', )
     list_filter = ('order',)
+
+
+@admin.register(Feedback)
+class Feedback(admin.ModelAdmin):
+    """
+    Обратная связь
+    """
+    list_display = ('name', 'phone', 'email', 'message', 'date')
+    list_filter = ('date',)

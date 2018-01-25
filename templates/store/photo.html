@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load poll_extras %}
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Фото</h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "index" %}">Главная</a>
+            </li>
+            <li class="breadcrumb-item active">Фото</li>
+        </ol>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

@@ -11,5 +11,8 @@ urlpatterns = [
     url(r'^create/order/$', views.create_order, name='create_order'),
     url(r'^order/(?P<id>\d+)/$', views.show_order, name='show_order'),
     url(r'^about/$', views.about, name='about'),
+    url(r'^photo/$', views.photo, name='photo'),
+    url(r'^documents/$', views.documents, name='documents'),
+    url(r'^feedback/$', views.feedback, name='feedback'),
     url(r'^$', views.index, name='index'),
 ]
