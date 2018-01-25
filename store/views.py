@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback
+from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo
 
 
 def index(request):
@@ -181,11 +181,13 @@ def photo(request):
     :return:
     """
     cart_item_list = get_cart_item_list(request)
+    photo_list = Photo.objects.all()
     return render(
         request,
         "store/photo.html",
         {
-            "cart_size": len(cart_item_list)
+            "cart_size": len(cart_item_list),
+            "photo_list": photo_list
         }
     )
 

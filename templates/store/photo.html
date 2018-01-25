@@ -14,6 +14,19 @@
             <li class="breadcrumb-item active">Фото</li>
         </ol>
 
+        <div class="row">
+        {% for item in photo_list %}
+            {% if forloop.counter0|divisibleby:"4" %}
+                </div>
+                <div class="row">
+            {% endif %}
+            <div class="col-md-3">
+                <img style="width: 300px; height: 200px; object-fit: cover;" class="img-fluid img-thumbnail" src="{{ item.photo.url }}" alt="">
+            </div>
+        {% endfor %}
+
+        </div>
+
     </div>
     <!-- /.container -->
 {% endblock %}
