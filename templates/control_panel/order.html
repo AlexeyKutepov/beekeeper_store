@@ -18,6 +18,20 @@
             <li class="breadcrumb-item active">Заказ №{{ order.id }}</li>
         </ol>
 
+        {% if order.status == 'Принят' or order.status == 'Исполнение' %}
+            <div class="alert alert-primary" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% elif order.status == 'Исполнен' %}
+            <div class="alert alert-success" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% elif order.status == 'Отменён' %}
+            <div class="alert alert-danger" role="alert">
+                Статус заказа: {{ order.status }}
+            </div>
+        {% endif %}
+
         <form action="{% url "change_order_status" id=order.id %}" method="post">
         {% csrf_token %}
             <div class="input-group mb-3">
@@ -30,7 +44,7 @@
                 </select>
                 <div class="input-group-append" style="margin-left: 10px">
                     <a>
-                        <button class="btn btn-outline-secondary" type="submit">Сохранить</button>
+                        <button class="btn btn-primary" type="submit">Сохранить</button>
                     </a>
                 </div>
             </div>

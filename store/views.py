@@ -59,12 +59,16 @@ def cart(request):
     :return:
     """
     cart_item_list = get_cart_item_list(request)
+    sum_cart = 0
+    for item in cart_item_list:
+        sum_cart += item.quantity * item.product.price
     return render(
         request,
         "store/cart.html",
         {
             "cart_item_list": cart_item_list,
-            "cart_size": len(cart_item_list)
+            "cart_size": len(cart_item_list),
+            "sum_cart": sum_cart
         }
     )
 
@@ -147,13 +151,17 @@ def show_order(request, id):
     order = Order.objects.get(id=id)
     order_item_list = OrderItem.objects.filter(order=order)
     cart_item_list = get_cart_item_list(request)
+    sum_order = 0
+    for item in order_item_list:
+        sum_order += item.quantity * item.product.price
     return render(
         request,
         "store/order.html",
         {
             "order": order,
             "order_item_list": order_item_list,
-            "cart_size": len(cart_item_list)
+            "cart_size": len(cart_item_list),
+            "sum_order": sum_order
         }
     )
 
