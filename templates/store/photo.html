@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load poll_extras %}
-{% block css %}
-{#    <link href="{% static "css/.min.css" %}" rel="stylesheet">#}
-{% endblock %}
 {% block content %}
     <!-- Page Content -->
     <div class="container">
@@ -25,7 +22,17 @@
                 <div class="row">
             {% endif %}
             <div class="col-md-3">
-                <a><img style="width: 300px; height: 200px; object-fit: cover;" class="img-fluid img-thumbnail" src="{{ item.photo.url }}" alt=""></a>
+                <div class="modal fade" id="examplePhoto{{ forloop.counter0 }}" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body text-center">
+                        <img  class="img-fluid " src="{{ item.photo.url }}" alt="{{ item.photo.name }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <a data-toggle="modal" data-target="#examplePhoto{{ forloop.counter0 }}"><img style="width: 300px; height: 200px; object-fit: cover;" class="img-fluid img-thumbnail" src="{{ item.photo.url }}" alt="{{ item.photo.name }}"></a>
             </div>
         {% endfor %}
 
@@ -34,7 +41,4 @@
 
     </div>
     <!-- /.container -->
-{% endblock %}
-{% block js %}
-{#  <script src="{% static "js/lquery.min.js" %}"></script>#}
 {% endblock %}
