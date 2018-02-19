@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import uuid
-
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -8,7 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 from beekeeper_store import settings
-from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo
+from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo, NotificationEmail
 
 
 def index(request):
@@ -246,10 +244,15 @@ def send_billing_email(request, order):
     msg_plain = "Благодарим Вас за покупку в интернет-магазине пчеловода Рязанцева! Статус заказа Вы можете отслеживать по ссылке: " + order_url
     msg_html = render_to_string('email/billing.html', {'order': order, "order_item_list": order_item_list, "sum_order": sum_order, "order_url": order_url})
 
+    notification_email = NotificationEmail.objects.all()
+    notification_list = [order.email]
+    for item in notification_email:
+        notification_list.append(item.email)
+
     send_mail(
         'Заказ №' + str(order.id),
         msg_plain,
         getattr(settings, "EMAIL_HOST_USER", None),
-        [order.email],
+        notification_list,
         html_message=msg_html,
     )

@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.contrib import admin
 
-from store.models import Product, Cart, Order, OrderItem, CartItem, Feedback, Photo
+from store.models import Product, Cart, Order, OrderItem, CartItem, Feedback, Photo, NotificationEmail
 
 
 @admin.register(Product)
@@ -64,3 +64,12 @@ class Photo(admin.ModelAdmin):
     """
     list_display = ('name', 'date',)
     list_filter = ('date',)
+
+
+@admin.register(NotificationEmail)
+class NotificationEmail(admin.ModelAdmin):
+    """
+    Адреса для уведомлений
+    """
+    list_display = ('email',)
+    list_filter = ('email',)

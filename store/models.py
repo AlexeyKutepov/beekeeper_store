@@ -121,3 +121,15 @@ class Photo(models.Model):
     def __str__(self):
         return self.name
 
+
+class NotificationEmail(models.Model):
+    """
+    Адреса для уведомлений
+    """
+    email = models.EmailField()
+
+    def __unicode__(self):
+        return self.email
+
+    def __str__(self):
+        return self.email
