@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import uuid
+
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -140,19 +142,19 @@ def create_order(request):
             item.delete()
         cart.delete()
         send_billing_email(request, order)
-        return HttpResponseRedirect(reverse("show_order", args=[order.id,]))
+        return HttpResponseRedirect(reverse("show_order", args=[order.id, order.uuid]))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def show_order(request, id):
+def show_order(request, id, uuid):
     """
     Показать заказ
     :param request:
     :param id: идентификатор заказа
     :return:
     """
-    order = Order.objects.get(id=id)
+    order = Order.objects.get(id=id, uuid=uuid)
     order_item_list = OrderItem.objects.filter(order=order)
     cart_item_list = get_cart_item_list(request)
     sum_order = 0
@@ -238,7 +240,7 @@ def feedback(request):
 def send_billing_email(request, order):
     order_item_list = OrderItem.objects.filter(order=order)
     sum_order = 0
-    order_url = request.build_absolute_uri(reverse("show_order", args=[order.id, ]))
+    order_url = request.build_absolute_uri(reverse("show_order", args=[order.id, order.uuid]))
     for item in order_item_list:
         sum_order += item.quantity * item.product.price
     msg_plain = "Благодарим Вас за покупку в интернет-магазине пчеловода Рязанцева! Статус заказа Вы можете отслеживать по ссылке: " + order_url

@@ -1,5 +1,5 @@
 # coding=utf-8
-from __future__ import unicode_literals
+import uuid
 
 from django.utils import timezone
 
@@ -68,6 +68,7 @@ class Order(models.Model):
         (executed, 'Исполнен'),
         (canceled, 'Отменён'),
     )
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=20)
     date = models.DateTimeField(default=timezone.now)
