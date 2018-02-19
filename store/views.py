@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 
+from beekeeper_store import settings
 from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo
 
 
@@ -136,6 +139,7 @@ def create_order(request):
             OrderItem.objects.create(product=item.product, quantity=item.quantity, order=order)
             item.delete()
         cart.delete()
+        send_billing_email(request, order)
         return HttpResponseRedirect(reverse("show_order", args=[order.id,]))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -229,3 +233,21 @@ def feedback(request):
         message = request.POST.get("message")
         Feedback.objects.create(name=name, email=email, phone=phone, message=message)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def send_billing_email(request, order):
+    order_item_list = OrderItem.objects.filter(order=order)
+    sum_order = 0
+    order_url = request.build_absolute_uri(reverse("show_order", args=[order.id, ]))
+    for item in order_item_list:
+        sum_order += item.quantity * item.product.price
+    msg_plain = "Благодарим Вас за покупку в интернет-магазине пчеловода Рязанцева! Статус заказа Вы можете отслеживать по ссылке: " + order_url
+    msg_html = render_to_string('email/billing.html', {'order': order, "order_item_list": order_item_list, "sum_order": sum_order, "order_url": order_url})
+
+    send_mail(
+        'Заказ №' + str(order.id),
+        msg_plain,
+        getattr(settings, "EMAIL_HOST_USER", None),
+        [order.email],
+        html_message=msg_html,
+    )
