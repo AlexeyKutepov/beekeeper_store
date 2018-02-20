@@ -33,7 +33,8 @@ def contacts(request):
     :param request:
     :return:
     """
-    return render(request, "store/contacts.html")
+    cart_item_list = get_cart_item_list(request)
+    return render(request, "store/contacts.html", {"cart_size": len(cart_item_list),})
 
 
 def product(request, id):
