@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^photo/$', views.photo, name='photo'),
     url(r'^documents/$', views.documents, name='documents'),
+    url(r'^delivery/$', views.delivery, name='delivery'),
     url(r'^feedback/$', views.feedback, name='feedback'),
     url(r'^$', views.index, name='index'),
 ]

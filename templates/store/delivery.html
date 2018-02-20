@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load poll_extras %}
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="mt-4 mb-3">Доставка
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "index" %}" style="float: left">Главная</a>
+            </li>
+            <li class="breadcrumb-item active">Доставка</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-md-9">
+                <h5>Информация о доставке</h5>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+{% endblock %}

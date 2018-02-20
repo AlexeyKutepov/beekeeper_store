@@ -257,3 +257,19 @@ def send_billing_email(request, order):
         notification_list,
         html_message=msg_html,
     )
+
+
+def delivery(request):
+    """
+    Доставка
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    return render(
+        request,
+        "store/delivery.html",
+        {
+            "cart_size": len(cart_item_list)
+        }
+    )
