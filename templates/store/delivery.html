@@ -2,23 +2,29 @@
 {% load staticfiles %}
 {% load poll_extras %}
 {% block content %}
-    <!-- Page Content -->
-    <div class="container">
-        <h1 class="mt-4 mb-3">Доставка
-        </h1>
+<div class="container">
+    <h1 class="mt-4 mb-3">Доставка</h1>
 
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{% url "index" %}" style="float: left">Главная</a>
-            </li>
-            <li class="breadcrumb-item active">Доставка</li>
-        </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url "index" %}" style="float: left">Главная</a>
+        </li>
+        <li class="breadcrumb-item active">Доставка</li>
+    </ol>
 
-        <div class="row">
-            <div class="col-md-9">
-                <h5>Информация о доставке</h5>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Информация о доставке</h3>
+            <br>
+            <h5>Самовывоз</h5>
+            <p>Вы можете самостоятельно забрать товар в пункте выдачи по адресу: <b>Орловская область, г. Мценск, ул. Ленина, д. 13</b>. Узнать, поступил ли ваш товар в пункт выдачи можно по телефону <b>+7 (953) 81-81-239</b>.
+            <h5>Почтовая доставка</h5>
+            <p>Мы можем отправить ваш заказ  Почтой России. Стоимость доставки зависит от региона и рассчитывается при оформлении заказа. Товар отправляется наложенным платежом.</p>
+            <h5>Доставка по Орловской области</h5>
+            <p>Если вы проживаете в Орловской области, то мы можем доставить товар по вашему адресу. Условия доставки обговариваются индивидуально.</p>
+            <br>
+            <h5>Есть вопросы? Звоните по телефону: <b>+7 (953) 81-81-239</b></h5>
         </div>
     </div>
-    <!-- /.container -->
+</div>
 {% endblock %}
