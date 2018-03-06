@@ -1,0 +1,8 @@
+#for all
+User-agent: *
+Disallow: /admin/
+
+#for yandex
+User-agent: Yandex
+Disallow: /admin/
+Host: http://xn----8sbecheeo6azafbiv7ge8l.xn--p1ai/

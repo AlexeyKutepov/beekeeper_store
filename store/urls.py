@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -15,5 +16,6 @@ urlpatterns = [
     url(r'^documents/$', views.documents, name='documents'),
     url(r'^delivery/$', views.delivery, name='delivery'),
     url(r'^feedback/$', views.feedback, name='feedback'),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^$', views.index, name='index'),
 ]
