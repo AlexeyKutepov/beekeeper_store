@@ -93,7 +93,8 @@
                                                 <h6>{{ product.name }}</h6>
                                                 <div class="input-group">
                                                     <input name="quantity"
-                                                            type="number"
+                                                           min="{% if product.measure == "кг" %}0.100{% else %}1{% endif %}" max="100"
+                                                           type="number"
                                                            step="{% if product.measure == "кг" %}0.100{% else %}1{% endif %}"
                                                            class="form-control"
                                                            value="1">

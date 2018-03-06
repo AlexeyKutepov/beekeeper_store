@@ -10,8 +10,8 @@ class Product(models.Model):
     """
     Товар
     """
-    kg = 'кг'
-    pcs = 'шт'
+    kg = u'кг'
+    pcs = u'шт'
     measure_classifier = (
         (kg, 'кг'),
         (pcs, 'шт'),
