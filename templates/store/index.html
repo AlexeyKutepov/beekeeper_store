@@ -92,6 +92,7 @@
                                             <div class="modal-body">
                                                 <h6>{{ product.name }}</h6>
                                                 <div class="input-group">
+                                                    <div class="input-group-addon">Количество</div>
                                                     <input name="quantity"
                                                            min="{% if product.measure == "кг" %}0.100{% else %}1{% endif %}" max="100"
                                                            type="number"

@@ -17,6 +17,7 @@
                     <div class="modal-body">
                         <h6>{{ product.name }}</h6>
                         <div class="input-group">
+                            <div class="input-group-addon">Количество</div>
                             <input name="quantity"
                                    min="{% if product.measure == "кг" %}0.100{% else %}1{% endif %}" max="100"
                                    type="number"
@@ -66,19 +67,8 @@
                     <span style="color: red; ">Нет в наличии</span>
                 {% endif %}
                 </p>
-                <div class="form-inline">
-                    <div class="input-group" style="width: 300px">
-                        <div class="input-group-addon">Количество</div>
-                        {% if product.measure == "кг" %}
-                            <input min="0.1" max="100" type="number" step="0.100" class="form-control" value="1">
-                        {% else %}
-                            <input min="1" max="100" type="number" step="1" class="form-control" value="1">
-                        {% endif %}
-                        <div class="input-group-addon">{{ product.measure }}</div>
-                    </div>
-                    <a href="" class="btn btn-primary" data-toggle="modal"
-                       data-target="#buyProductModal" style="margin-left: 10px">Купить</a>
-                </div>
+                <a href="" class="btn btn-primary btn-lg" style="width: 200px" data-toggle="modal"
+                       data-target="#buyProductModal">Купить</a>
             </div>
 
         </div>
