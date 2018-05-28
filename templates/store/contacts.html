@@ -1,95 +1,98 @@
 {% extends "base.html" %}
 {% block content %}
-	    <!-- Page Content -->
+    <!-- Page Content -->
     <div class="container">
 
-      <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Контакты</h1>
-      <hr>
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Контакты</h1>
+        <hr>
 
-      <!-- Content Row -->
-      <div class="row">
-        <!-- Map Column -->
-        <div class="col-lg-8 mb-4">
-          <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1LdBSjrBGAu5A-77AF71jMLoCSePOD0o&amp;width=100%25&amp;height=480&amp;lang=ru_RU&amp;scroll=true"></script>
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Map Column -->
+            <div class="col-lg-8 mb-4">
+                <script type="text/javascript" charset="utf-8" async
+                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1LdBSjrBGAu5A-77AF71jMLoCSePOD0o&amp;width=100%25&amp;height=480&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+            <!-- Contact Details Column -->
+            <div class="col-lg-4 mb-4" itemscope itemtype="http://schema.org/Organization">
+                <h3>Контактная информация</h3>
+                <p></p>
+                <p>
+                    <b itemprop="name">Индивидуальный предприниматель Рязанцев Владимир Анатольевич</b>
+                </p>
+                <p>
+                    <b>ОГРНИП</b> 304573915200025 от 31 мая 2004 г.
+                </p>
+                <p>
+                    <b>ИНН</b> 570300198399
+                </p>
+                <p itemprop="address">
+                    Орловская область, г. Мценск, ул. Ленина, д. 13
+                </p>
+                <p>
+                    <i class="fa fa-phone" aria-hidden="true"></i> <span itemprop="telephone">+7 (953) 81-81-239</span>
+                </p>
+                <p>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:info@пчеловод-рязанцев.рф"><span itemprop="email">info@пчеловод-рязанцев.рф</span>
+                    </a>
+                </p>
+                <p>
+                    <i class="fa fa-link"></i>
+                    <a href="http://пчеловод-рязанцев.рф" itemprop="url">http://пчеловод-рязанцев.рф</a>
+                </p>
+                <p>
+                    <i class="fa fa-vk"></i>
+                    <a href="https://vk.com/pchelovodryazancev" itemprop="sameAs">https://vk.com/pchelovodryazancev</a>
+                </p>
+                <p>
+                    <i class="fa fa-odnoklassniki"></i>
+                    <a href="https://www.ok.ru/group/55087310307570" itemprop="sameAs">https://www.ok.ru/group/55087310307570</a>
+                </p>
+            </div>
         </div>
-        <!-- Contact Details Column -->
-        <div class="col-lg-4 mb-4">
-          <h3>Контактная информация</h3>
-            <p></p>
-          <p>
-            Орловская область, г. Мценск, ул. Ленина, д. 13
-          </p>
-          <p>
-            <i class="fa fa-phone" aria-hidden="true"></i> +7 (953) 81-81-239
-          </p>
-          <p>
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <a href="mailto:info@пчеловод-рязанцев.рф">info@пчеловод-рязанцев.рф
-            </a>
-          </p>
-          <p>
-              <i class="fa fa-vk"></i>
-              <a href="https://vk.com/pchelovodryazancev">https://vk.com/pchelovodryazancev</a>
-          </p>
-          <p>
-              <i class="fa fa-odnoklassniki"></i>
-              <a href="https://www.ok.ru/group/55087310307570">https://www.ok.ru/group/55087310307570</a>
-          </p>
+        <!-- /.row -->
 
-          <h3>Реквизиты</h3>
-            <p></p>
-          <p>
-              <b>Индивидуальный предприниматель Рязанцев Владимир Анатольевич</b>
-          </p>
-          <p>
-            <b>ОГРНИП</b> 304573915200025 от 31 мая 2004 г.
-          </p>
-          <p>
-            <b>ИНН</b> 570300198399
-          </p>
+        <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <h3>Написать сообщение</h3>
+                <form name="sentMessage" id="contactForm" action="{% url "feedback" %}" method="post">
+                    {% csrf_token %}
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Имя:</label>
+                            <input type="text" class="form-control" name="name" required>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Телефон:</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Сообщение:</label>
+                            <textarea rows="10" cols="100" class="form-control" name="message" required maxlength="999"
+                                      style="resize:none"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+
         </div>
-      </div>
-      <!-- /.row -->
-
-      <!-- Contact Form -->
-      <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-      <div class="row">
-        <div class="col-lg-8 mb-4">
-          <h3>Написать сообщение</h3>
-          <form name="sentMessage" id="contactForm" action="{% url "feedback" %}" method="post">
-            {% csrf_token %}
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Имя:</label>
-                <input type="text" class="form-control" name="name" required>
-                <p class="help-block"></p>
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Телефон:</label>
-                <input type="tel" class="form-control" name="phone" required>
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Email:</label>
-                <input type="email" class="form-control" name="email" required>
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Сообщение:</label>
-                <textarea rows="10" cols="100" class="form-control" name="message" required maxlength="999" style="resize:none"></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Отправить</button>
-          </form>
-        </div>
-
-      </div>
-      <!-- /.row -->
+        <!-- /.row -->
 
     </div>
     <!-- /.container -->
