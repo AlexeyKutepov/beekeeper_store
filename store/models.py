@@ -1,6 +1,7 @@
 # coding=utf-8
 import uuid
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 
 from django.db import models
@@ -133,3 +134,10 @@ class NotificationEmail(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Post(models.Model):
+    """
+    Пост
+    """
+    content = RichTextUploadingField('contents')
