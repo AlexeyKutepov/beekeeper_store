@@ -23,7 +23,7 @@
                             </a>
                         </div>
                         <div class="col-lg-8">
-                            <h2 class="card-title">{{ post.title }}</h2>
+                            <h2 class="card-title"> <a href="{% url "post" id=post.id %}">{{ post.title }}</a></h2>
                             <p class="card-text">{{ post.short_text }}</p>
                             <a href="{% url "post" id=post.id %}" class="btn btn-primary">Читать далее &rarr;</a>
                         </div>
