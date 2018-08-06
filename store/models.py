@@ -140,4 +140,14 @@ class Post(models.Model):
     """
     Пост
     """
+    title = models.CharField(max_length=500, default="Title")
+    title_image = models.ImageField(upload_to="title_images")
+    date = models.DateTimeField(default=timezone.now)
+    short_text = models.TextField()
     content = RichTextUploadingField('contents')
+
+    def __unicode__(self):
+        return self.title
+
+    def __str__(self):
+        return self.title

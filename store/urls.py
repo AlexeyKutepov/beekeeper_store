@@ -4,6 +4,8 @@ from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
+    url(r'^blog/$', views.blog, name='blog'),
+    url(r'^post/(?P<id>\d+)/$', views.post, name='post'),
     url(r'^contacts/$', views.contacts, name='contacts'),
     url(r'^add-to-cart/(?P<id>\d+)/$', views.add_to_cart, name='add_to_cart'),
     url(r'^delete-from-cart/(?P<id>\d+)/$', views.delete_from_cart, name='delete_from_cart'),

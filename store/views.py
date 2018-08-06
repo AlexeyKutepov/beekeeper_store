@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 from beekeeper_store import settings
-from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo, NotificationEmail
+from store.models import Product, CartItem, Cart, Order, OrderItem, Feedback, Photo, NotificationEmail, Post
 
 
 def index(request):
@@ -34,7 +34,7 @@ def contacts(request):
     :return:
     """
     cart_item_list = get_cart_item_list(request)
-    return render(request, "store/contacts.html", {"cart_size": len(cart_item_list),})
+    return render(request, "store/contacts.html", {"cart_size": len(cart_item_list), })
 
 
 def product(request, id):
@@ -205,6 +205,42 @@ def photo(request):
     )
 
 
+def blog(request):
+    """
+    Блог
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    posts = Post.objects.all()
+    return render(
+        request,
+        "store/blog.html",
+        {
+            "cart_size": len(cart_item_list),
+            "posts": posts
+        }
+    )
+
+
+def post(request, id):
+    """
+    Пост
+    :param request:
+    :return:
+    """
+    cart_item_list = get_cart_item_list(request)
+    post = Post.objects.get(id=id)
+    return render(
+        request,
+        "store/post.html",
+        {
+            "cart_size": len(cart_item_list),
+            "post": post
+        }
+    )
+
+
 def documents(request):
     """
     Документы
@@ -243,7 +279,9 @@ def send_billing_email(request, order):
     for item in order_item_list:
         sum_order += item.quantity * item.product.price
     msg_plain = "Благодарим Вас за покупку в интернет-магазине пчеловода Рязанцева! Статус заказа Вы можете отслеживать по ссылке: " + order_url
-    msg_html = render_to_string('email/billing.html', {'order': order, "order_item_list": order_item_list, "sum_order": sum_order, "order_url": order_url})
+    msg_html = render_to_string('email/billing.html',
+                                {'order': order, "order_item_list": order_item_list, "sum_order": sum_order,
+                                 "order_url": order_url})
 
     notification_email = NotificationEmail.objects.all()
     notification_list = [order.email]

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container">
+
+        <h1 class="mt-4 mb-3">Блог</h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url "index" %}">Главная</a>
+            </li>
+            <li class="breadcrumb-item active">Блог</li>
+        </ol>
+
+        {% for post in posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <a href="#">
+                                <img height="250px" class="rounded mb-3 mb-md-0" src="{{ post.title_image.url }}"
+                                     alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-8">
+                            <h2 class="card-title">{{ post.title }}</h2>
+                            <p class="card-text">{{ post.short_text }}</p>
+                            <a href="{% url "post" id=post.id %}" class="btn btn-primary">Читать далее &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    Дата публикации {{ post.date|date:"d.m.Y" }}
+                </div>
+            </div>
+
+        {% endfor %}
+
+        <!-- Pagination -->
+        {#      <ul class="pagination justify-content-center mb-4">#}
+        {#        <li class="page-item">#}
+        {#          <a class="page-link" href="#">&larr; Older</a>#}
+        {#        </li>#}
+        {#        <li class="page-item disabled">#}
+        {#          <a class="page-link" href="#">Newer &rarr;</a>#}
+        {#        </li>#}
+        {#      </ul>#}
+
+    </div>
+    <!-- /.container -->
+    <br>
+
+{% endblock %}

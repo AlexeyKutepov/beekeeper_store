@@ -54,6 +54,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url "blog" %}">Блог</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url "photo" %}">Фото</a>
                 </li>
                 <li class="nav-item">
@@ -139,12 +142,12 @@
 }
 </script>
 
-<script type="text/javascript" src="https://vk.com/js/api/openapi.js?156"></script>
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?158"></script>
 
 <!-- VK Widget -->
 <div id="vk_community_messages"></div>
 <script type="text/javascript">
-VK.Widgets.CommunityMessages("vk_community_messages", 162315692, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
+VK.Widgets.CommunityMessages("vk_community_messages", 162315692, {expandTimeout: "5000",tooltipButtonText: "Есть вопрос?"});
 </script>
 
 {% block js %}
