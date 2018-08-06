@@ -212,7 +212,7 @@ def blog(request):
     :return:
     """
     cart_item_list = get_cart_item_list(request)
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-date')
     return render(
         request,
         "store/blog.html",
