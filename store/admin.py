@@ -10,8 +10,8 @@ class Product(admin.ModelAdmin):
     """
     Товары
     """
-    list_display = ('name', 'price', 'measure', 'in_stock')
-    list_filter = ('name',)
+    list_display = ('name', 'price', 'measure', 'in_stock', 'is_show', 'order_number',)
+    list_filter = ('name', 'order_number',)
 
 
 @admin.register(Cart)
