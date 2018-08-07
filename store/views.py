@@ -15,7 +15,7 @@ def index(request):
     :param request:
     :return:
     """
-    product_list = Product.objects.all()
+    product_list = Product.objects.filter(is_show=True).order_by('order_number')
     cart_item_list = get_cart_item_list(request)
     return render(
         request,

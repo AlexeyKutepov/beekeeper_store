@@ -31,6 +31,11 @@ class Product(models.Model):
     measure = models.CharField(max_length=10, choices=measure_classifier, default=kg)
     # Флаг указывающий наличие товара на складе
     in_stock = models.BooleanField(default=True)
+    # Отображать товар
+    is_show = models.BooleanField(default=True)
+    # Порядковый номер товара
+    order_number = models.IntegerField(default=0)
+
 
     def __unicode__(self):
         return self.name
