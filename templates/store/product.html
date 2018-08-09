@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block meta %}
+{% block head %}
+    <title>{{ product.name }}</title>
     <meta name="description" content="{{ product.short_description }}">
 {% endblock %}
 {% block content %}

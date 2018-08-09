@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block head %}
+    <title>{{ post.title }}</title>
+    <meta name="description" content="{{ post.short_text }}">
+{% endblock %}
 {% block content %}
 
     <!-- Page Content -->

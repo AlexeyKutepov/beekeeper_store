@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load poll_extras %}
+{% block head %}
+    <title>Заказ №{{ order.id }}</title>
+    <meta name="description" content="Спасибо за ваш заказ в интернет-магазине пчеловода Рязанцева! Если у Вас возникли вопросы, звоните по телефону +7 (953) 81-81-239">
+{% endblock %}
 {% block content %}
     <!-- Page Content -->
     <div class="container">
