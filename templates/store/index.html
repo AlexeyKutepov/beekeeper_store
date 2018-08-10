@@ -78,8 +78,10 @@
                             <div class="block_100">
                                 <p class="card-text">{{ product.short_description }}</p>
                             </div>
-                            <a href="" class="btn btn-primary" data-toggle="modal"
+                            <a href="" class="btn btn-success" data-toggle="modal"
                                data-target="#buyProductModal{{ forloop.counter0 }}">Купить</a>
+
+                            <a href="{% url "product" id=product.id %}" class="btn btn-primary pull-right">Подробнее</a>
 
                             <div class="modal fade" id="buyProductModal{{ forloop.counter0 }}" tabindex="-1"
                                  role="dialog"
