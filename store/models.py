@@ -35,6 +35,8 @@ class Product(models.Model):
     is_show = models.BooleanField(default=True)
     # Порядковый номер товара
     order_number = models.IntegerField(default=0)
+    # Дата обновления
+    update_date = models.DateTimeField(default=timezone.now)
 
 
     def __unicode__(self):
@@ -42,6 +44,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return "/product/%i/" % self.id
 
 
 class Cart(models.Model):
@@ -148,6 +153,7 @@ class Post(models.Model):
     title = models.CharField(max_length=500, default="Title")
     title_image = models.ImageField(upload_to="title_images")
     date = models.DateTimeField(default=timezone.now)
+    update_date = models.DateTimeField(default=timezone.now)
     short_text = models.TextField()
     content = RichTextUploadingField('contents')
 
@@ -156,3 +162,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return "/post/%i/" % self.id

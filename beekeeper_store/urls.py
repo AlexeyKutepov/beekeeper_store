@@ -17,10 +17,20 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 
 from beekeeper_store import settings
+from store.sitemap import PostSitemap, ProductSitemap, StaticSitemap
+
+sitemaps = {
+	'posts': PostSitemap,
+    'products': ProductSitemap,
+    'static': StaticSitemap,
+}
 
 urlpatterns = [
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+                      name='django.contrib.sitemaps.views.sitemap'),
     url(r'^admin/', admin.site.urls),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include('store.urls')),
